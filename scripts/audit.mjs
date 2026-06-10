@@ -87,6 +87,8 @@ const RE = {
   useEffect: /useEffect\s*\(/,
   fetchCall: /\bfetch\s*\(/,
   barrelStarReexport: /export\s+\*\s+from/,
+  legacyHead: /import\s+\w+\s+from\s+['"]next\/head['"]/,
+  legacyImage: /from\s+['"]next\/legacy\/image['"]/,
 };
 
 function analyze(file, src) {
@@ -180,7 +182,21 @@ function analyze(file, src) {
       `Sanitize the HTML server-side, or render structured content instead.`);
   }
 
-  // 11. Oversized client component
+  // 11. Legacy next/head — does nothing in the App Router
+  if (RE.legacyHead.test(src)) {
+    add(rel, firstMatchLine(src, RE.legacyHead), "ERROR", "legacy-next-head",
+      `\`next/head\` is a no-op in the App Router — tags rendered through it never reach the document <head>.`,
+      `Move those tags into the \`metadata\` export (or \`generateMetadata\`).`);
+  }
+
+  // 12. next/legacy/image — opts out of modern image optimization
+  if (RE.legacyImage.test(src)) {
+    add(rel, firstMatchLine(src, RE.legacyImage), "WARN", "legacy-next-image",
+      `\`next/legacy/image\` keeps the old layout-shift-prone behavior.`,
+      `Migrate to \`next/image\` and set \`sizes\` (or \`fill\`) for responsive, CLS-safe images.`);
+  }
+
+  // 13. Oversized client component
   const lineCount = src.split("\n").length;
   if (isClient && lineCount > 250) {
     add(rel, 1, "INFO", "large-client-component",

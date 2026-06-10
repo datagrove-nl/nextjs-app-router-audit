@@ -29,6 +29,8 @@ What it detects:
 | Rule | Severity | Why it matters |
 |------|----------|----------------|
 | `client-route-no-metadata` | ERROR | A `"use client"` page/layout silently drops `metadata` — SEO tags never ship. |
+| `legacy-next-head` | ERROR | `next/head` is a no-op in the App Router — its tags never reach `<head>`. |
+| `legacy-next-image` | WARN | `next/legacy/image` keeps old layout-shift-prone behavior. |
 | `needless-use-client` | WARN | `"use client"` with no hooks/handlers/browser APIs — pushes JS to the client for nothing. |
 | `client-fetch-in-effect` | WARN | Fetching in `useEffect` adds a render round-trip; move it server-side. |
 | `raw-img` | WARN | `<img>` skips `next/image` sizing/lazy-loading — CLS & LCP regressions. |

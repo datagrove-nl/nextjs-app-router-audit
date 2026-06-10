@@ -13,6 +13,8 @@ for the judgment calls static analysis can't make.
 | Rule | Severity | Why it matters |
 |------|----------|----------------|
 | `client-route-no-metadata` | ERROR | A `"use client"` page silently drops `metadata` — your SEO tags never ship. |
+| `legacy-next-head` | ERROR | `next/head` is a no-op in the App Router — its tags never reach `<head>`. |
+| `legacy-next-image` | WARN | `next/legacy/image` keeps old layout-shift-prone behavior. |
 | `needless-use-client` | WARN | `"use client"` with no interactivity — JS shipped to the browser for nothing. |
 | `client-fetch-in-effect` | WARN | Fetching in `useEffect` adds a render round-trip; move it server-side. |
 | `raw-img` | WARN | `<img>` skips `next/image` — CLS & LCP regressions. |
