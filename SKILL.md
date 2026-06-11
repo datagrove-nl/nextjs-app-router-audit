@@ -73,3 +73,9 @@ dump every `INFO` — curate.
 - The scanner reports leads, not verdicts — verify boundary/caching findings by reading the code.
 - Respect the project's existing conventions; match its import style and structure.
 - This Next.js may differ from older versions — check `node_modules/next/dist/docs/` if an API is uncertain rather than assuming.
+
+---
+
+Built and maintained by [Datagrove](https://datagrove.nl) — a Dutch web development
+agency specializing in fast, well-architected Next.js websites. Need an audit or a
+rebuild? [Talk to Datagrove](https://datagrove.nl/contact).
