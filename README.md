@@ -45,6 +45,9 @@ ERROR client-route-no-metadata  app/dashboard/page.tsx:1
 Summary  1 error  3 warn  9 info   score 67/100
 ```
 
+See [`examples/sample-report.md`](examples/sample-report.md) for full output
+against the bundled fixture app.
+
 Drop it into CI to fail a PR when a route loses its metadata or leaks a secret into the client bundle.
 
 ## Use it as a Claude skill
